@@ -1,0 +1,23 @@
+package com.test.spring.di.five;
+
+import java.util.ArrayList;
+
+public class Ex05 {
+	
+	public static void main(String[] args) {
+		
+		
+		
+		Service service = new Service();
+		
+		ArrayList<String> list = service.list();
+		
+		for (String name : list) {
+			System.out.println(name);
+		}
+		
+		
+		
+	}
+	
+}

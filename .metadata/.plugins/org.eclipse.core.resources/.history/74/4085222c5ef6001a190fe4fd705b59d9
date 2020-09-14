@@ -1,0 +1,6 @@
+package com.test.spring.aop;
+
+public class Memo {
+//	이놈이   Service를 지칭한다.
+
+}

@@ -1,0 +1,9 @@
+package com.test.spring.di.six;
+
+public class Service {
+	
+	public void test() {
+		
+	}
+	
+}

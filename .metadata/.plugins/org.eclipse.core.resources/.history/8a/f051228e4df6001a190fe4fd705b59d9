@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	
+	config06.xml
+	
+	스프링 설정 파일
+	- 스프링에서 객체 정의
+	- 의존관계 및 의존 주입을 정의
+
+	자바 빈, Java Bean
+
+
+ -->
+ 
+ <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- 
+		스프링이 하는 행동 중 하나가  ***객체생성임*** 
+		
+		스프링이 객체의 생성부터 소멸까지 관리를 하게된다.
+			
+	-->
+	
+
+ <!-- bean 하나가 객체 생성하는 "도구"라고 생각하면 된다. -->
+ <!-- 식별자를 id로 주게 된다. -->
+ <!-- 해당 bean은 아직 객체가 아니고 java에서 getBean을 해야 객체가 된다. -->
+ <bean id = "s1" class="com.test.spring.di.six.Service"></bean>
+ 
+ <bean id = "user" class="com.test.spring.di.six.User"></bean>
+ 
+ <bean id = "user2" class="com.test.spring.di.six.User">
+ 	<property name="name" value = "하하하"></property>
+ 	<property name="age" value = "89"></property>
+ 	<!-- 
+ 		property란  User class 의 setter 를 말하는 것이다.
+ 		
+ 		- name -> setName 을 뜻한다. name 을 하면 setName 찾아서 매개변수로 넣어주는 역할을 수행한다.
+ 		jstl getter 을 찾는방식과 비슷하다고 보면 된다.
+ 		
+ 		
+ 	-->
+ </bean>
+ 
+ 
+</beans>
+ 

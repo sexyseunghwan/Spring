@@ -1,0 +1,21 @@
+package com.test.spring.di.five;
+
+import java.util.ArrayList;
+
+public class Service {
+
+	
+	public ArrayList<String> list() {
+		
+		IData data = new MyFile();
+		//IData data = new MyDB();//여기서도 참조변수를 인터페이스로 만드는것이 좋다.
+		
+		//아직까지는 왜 인터페이슬를 참조하는지 이해할수 없지만....
+		
+		ArrayList<String> list = data.getList();
+		
+		
+		return list;
+	}
+
+}

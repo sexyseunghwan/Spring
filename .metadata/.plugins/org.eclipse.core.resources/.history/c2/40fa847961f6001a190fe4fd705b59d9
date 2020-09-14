@@ -1,0 +1,39 @@
+package com.test.spring.aop;
+
+
+//Memo 이놈이   Service를 지칭한다.
+public class Memo implements IMemo{
+
+	@Override
+	public void add(String memo) {
+		
+		System.out.println();
+	}
+
+	@Override
+	public void read(int seq) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void edit(String memo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(int seq) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int search(String word) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	
+}

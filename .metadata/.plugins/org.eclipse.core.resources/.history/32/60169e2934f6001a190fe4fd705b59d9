@@ -1,0 +1,8 @@
+package com.test.spring.di.four;
+
+public interface IData {
+	
+	//MyFile + MyDB 의 부모역할 수행.
+	ArrayList<String> getList();
+	
+}

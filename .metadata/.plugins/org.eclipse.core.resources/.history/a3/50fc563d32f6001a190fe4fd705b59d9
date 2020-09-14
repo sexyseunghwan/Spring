@@ -1,0 +1,19 @@
+package com.test.spring.di.three;
+
+import java.util.ArrayList;
+
+public class MyDB {
+
+	public ArrayList<String> list() {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		
+		//텍스트 파일 내용 -> 배열 옮기기
+		list.add("신승환");
+		list.add("고서윤");
+		list.add("사랑행");
+		
+		return list;
+	}
+
+}

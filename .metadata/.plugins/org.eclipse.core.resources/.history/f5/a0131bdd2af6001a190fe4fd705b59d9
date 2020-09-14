@@ -1,0 +1,25 @@
+package com.test.spring.di.two;
+
+import java.util.Scanner;
+
+public class Util {
+	
+	//본인에게 필요한 의존객체(Scanner) 를 직접 생성하지 않고 외부로부터 받아서 사용
+	public String getName(Scanner scan) {
+		
+		//여기서도 본인이 다 알아서 하는게 아니라 Scanner 객체에 의존하고 있다.
+		//Ex02 -> Util -> Scanner
+		
+		//Util의 의존 객체
+		//Scanner scan = new Scanner(System.in);
+		//스캐너를 본인이 안만들고 있다 외부로부터 받아오고 있다
+		
+		
+		System.out.print("이름 : ");
+		
+		String name = scan.nextLine();
+		
+		return name;
+	}
+	
+}

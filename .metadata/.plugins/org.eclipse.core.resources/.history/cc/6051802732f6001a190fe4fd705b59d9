@@ -1,0 +1,12 @@
+package com.test.spring.di.three;
+
+import java.util.ArrayList;
+
+public class MyDB {
+
+	public ArrayList<String> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

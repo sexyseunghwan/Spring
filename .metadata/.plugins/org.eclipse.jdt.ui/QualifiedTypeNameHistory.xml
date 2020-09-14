@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.text.spring.di.one.Util"/>
+<fullyQualifiedTypeName name="com.test.spring.di.two.Util"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="com.test.spring.di.three.Service"/>
+<fullyQualifiedTypeName name="com.test.spring.di.three.MyFile"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="com.test.spring.di.three.MyDB"/>
+<fullyQualifiedTypeName name="com.test.spring.di.four.MyFile"/>
+<fullyQualifiedTypeName name="com.test.spring.di.five.MyFile"/>
+<fullyQualifiedTypeName name="com.test.spring.di.six.Service"/>
+<fullyQualifiedTypeName name="com.test.spring.di.six.User"/>
+<fullyQualifiedTypeName name="com.test.spring.di.seven.Service"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+</qualifiedTypeNameHistroy>
