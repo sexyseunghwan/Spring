@@ -83,17 +83,27 @@
 				
 				<!-- 엮어야 한다! -->
 				<!-- <aop:before method="before" pointcut-ref="m9"/> -->
-				<aop:before method="before" pointcut-ref="m2"/>
+				<!-- <aop:before method="before" pointcut-ref="m2"/> -->
 				<!-- 이런식으로 위에서 지정해준 포인트 컷을 여기에서도 사용할 수 있다. -->
 				<!-- aop:기능 method 는 진짜 메서드 이름 진짜 beforer 이라는 메서드가 존재하므로!! -->
-		
+				
 				
 		
 				<!--  Around 새로운 보조업무 매핑 -->
-				<aop:around method="around" pointcut-ref="m9"/>
+				<!-- <aop:around method="around" pointcut-ref="m9"/> -->
 		
 				
+				<!-- After Throwing Advice 새로운 보조업무 매핑 -->
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.read(..))" id="m10"/>
 				
+				<!-- <aop:after-throwing method="afterthrowing" pointcut-ref="m10" throwing="e"/>-->
+				<!-- Exception e 에서 e 가 들어가면 된다. -->
+				
+				<!-- After Returning Advice 새로운 보조업무 매핑 -->
+				
+				<aop:pointcut expression="execution(public int com.test.spring.aop.Memo.search(..))" id="m11"/>
+				<aop:after-returning method="afterreturning" pointcut-ref="m11" returning="obj"/>
+				<!-- Object obj 에서 obj가 들어가면 된다. -->
 				
 				
 				

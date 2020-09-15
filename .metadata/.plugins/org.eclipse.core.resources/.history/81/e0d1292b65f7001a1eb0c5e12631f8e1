@@ -12,7 +12,7 @@
 		
 		<!-- 주 업무 객체 + 보조 업무 객체  -->
 		
-		<!-- 주 업무 객체 -->
+		<!-- 주 업무 객체  -->
 		<bean id = "memo" class = "com.test.spring.aop.Memo"></bean>
 		
 		<!-- 보조 업무 객체 -->
@@ -29,7 +29,7 @@
 		<aop:config>
 			
 			<!-- 보조 업무 객체를 지정하는 역할을 수행한다. -->
-			<!-- 레퍼런스로 참조를 걸어주면 된다. -->
+			<!-- 레퍼런스로 참조를 걸어주면 된다. 위에 id -> logger을 의미하는 것이다.-->
 			<aop:aspect ref="logger" id="loggerAdvice">
 				
 				<!-- 
@@ -44,6 +44,7 @@
 					- 매개변수의 .. 은 wild card 즉 모든 매개변수의 형식을 다 지원한다.
 					- 식별자 * : 와일드 카드 -> 모든 메서드라는 표현으로 쓰인다.
 				 -->
+				
 				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.add(String))" id="m1"/>
 				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.*(..))" id="m2"/>
 				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.*(int))" id="m3"/>
@@ -73,7 +74,7 @@
 				<!-- 마지막으로 보조 업무 객체의 특정 메소드와 주 업무 객체의 특정 메소드를 연결 -->
 				<!-- 주업무 후에 보조 업무 연결시킬것이므로 after 을 쓰는것이 맞음.  -->
 				<!-- m1(주업무)를 실행하고 난 뒤(<aop:after>)에 after(보조업무) 를 실행하겠습니다. -->
-				<aop:after method="after" pointcut-ref="m8"/>
+				<!-- <aop:after method="after" pointcut-ref="m8"/> -->
 				<!-- 즉 노가다로 주업무에 하나하나씩 넣어야했던것이  위에코드 하나만으로 전체 메서드에 적용이된것 -->
 				
 				
@@ -83,17 +84,27 @@
 				
 				<!-- 엮어야 한다! -->
 				<!-- <aop:before method="before" pointcut-ref="m9"/> -->
-				<aop:before method="before" pointcut-ref="m2"/>
+				<!-- <aop:before method="before" pointcut-ref="m2"/> -->
 				<!-- 이런식으로 위에서 지정해준 포인트 컷을 여기에서도 사용할 수 있다. -->
 				<!-- aop:기능 method 는 진짜 메서드 이름 진짜 beforer 이라는 메서드가 존재하므로!! -->
-		
+				
 				
 		
 				<!--  Around 새로운 보조업무 매핑 -->
-				<aop:around method="around" pointcut-ref="m9"/>
+				<!-- <aop:around method="around" pointcut-ref="m9"/> -->
 		
 				
+				<!-- After Throwing Advice 새로운 보조업무 매핑 -->
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.read(..))" id="m10"/>
 				
+				<!-- <aop:after-throwing method="afterthrowing" pointcut-ref="m10" throwing="e"/>-->
+				<!-- Exception e 에서 e 가 들어가면 된다. -->
+				
+				<!-- After Returning Advice 새로운 보조업무 매핑 -->
+				
+				<aop:pointcut expression="execution(public int com.test.spring.aop.Memo.search(..))" id="m11"/>
+				<aop:after-returning method="afterreturning" pointcut-ref="m11" returning="obj"/>
+				<!-- Object obj 에서 obj가 들어가면 된다. -->
 				
 				
 				
