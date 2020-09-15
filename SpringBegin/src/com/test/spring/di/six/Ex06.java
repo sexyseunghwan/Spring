@@ -73,6 +73,8 @@ public class Ex06 {
 		//Service service = new Service(); 이 객체를 만들어야 된다.
 		
 		Service service = (Service)context.getBean("s1");//object 객체라 형변환이 필요함. 다운캐스팅이 필요하다.
+		//config06.xml 여기로 가서 s1이라는 이름의 class 를 가져오는 것이다.
+		//사실 xml에서 또 자바로 가서 해당 클래스를 찾는거긴 한다 -> 이런 일련의 작업을 왜 해주는지는 현재는 이해하지 못할 수 있다.
 		
 		String result = service.test();
 		

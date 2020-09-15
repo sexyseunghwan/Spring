@@ -3,10 +3,115 @@
 
  <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd">
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+		
+		<!-- 주 업무 객체 + 보조 업무 객체  -->
+		
+		<!-- 주 업무 객체 -->
+		<bean id = "memo" class = "com.test.spring.aop.Memo"></bean>
+		
+		<!-- 보조 업무 객체 -->
+ 		<bean id = "logger" class = "com.test.spring.aop.Logger"></bean>
+		
+		<!-- 위에서는 일단 객체만 정의해놓는 것이다. -->
+		
+		<!-- 
+			 Spring AOP 설정
+			
+		 -->
+		<!-- 주업무와 보조업무를 짝을 지어줄 것이다! -->
+		<!-- 아래에서 짝지어주는게 모두 이루어진다. -->
+		<aop:config>
+			
+			<!-- 보조 업무 객체를 지정하는 역할을 수행한다. -->
+			<!-- 레퍼런스로 참조를 걸어주면 된다. -->
+			<aop:aspect ref="logger" id="loggerAdvice">
+				
+				<!-- 
+					주 업무를 지정한다
+					: 주 업무 객체를 지정한다.(X)
+					: 주 업무 객체의 메소드를 지정한다(O)
+					
+					주 업무 객체의 특정 메소드를 지정한다 -> Point Cut(주업무 메소드)
+					
+					Point Cut 지정 방식 -> AspectJ 표현식(독립적인 표현식)
+					메서드 / 접근지정자  / 반환값 / 풀네임 메서드이름
+					- 매개변수의 .. 은 wild card 즉 모든 매개변수의 형식을 다 지원한다.
+					- 식별자 * : 와일드 카드 -> 모든 메서드라는 표현으로 쓰인다.
+				 -->
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.add(String))" id="m1"/>
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.*(..))" id="m2"/>
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.*(int))" id="m3"/>
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.*(int,String))" id="m4"/>
+				<!-- 매개변수를 위와 같은 식으로 늘리게 되면 해당되는 메서드를 찾아서 보조업무를 실행시켜준다 -->
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.*())" id="m5"/>
+				<!-- 매개변수란을 비워두면 매개변수로 아무것도 안들어가는 놈만 찾아준다. -->
+				<aop:pointcut expression="execution(public int com.test.spring.aop.Memo.*(..))" id="m6"/>
+				<!-- 반환값이 int 로 반환되는놈의 메서드만 보조업무 수행을 진행한다. -->
+				<aop:pointcut expression="execution(public * *..Memo.*(..))" id="m7"/>
+				<!-- 반환값에 wild card 들어갈 수 있음. -->
+				<!-- *.. 몇단계이던지 상관없이! -->
+				
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.*d(..))" id="m8"/>
+				<!-- 이름으로 구분 
+					 ~d 라는 이름의 메서드를 포인트컷으로 삼아준다.
+					 	//	a. 메모쓰기
+						void add(String memo);
+						
+						//	b. 메모읽기 - 예외 발생 가능성 있는 업무
+						void read(int seq) throws Exception;
+					        이거 두개만 해주고 싶다면?! 반환값도 공통된게 없고 매개변수도 공통된것이 없으므로  이름으로 공통된것을 찾아주면 된다.
+				-->
+				
+				<!-- 즉 위에서 가리키는게 메모 클래스에서 add 메서드를 가리키는 것이다. -->
+				
+				<!-- 마지막으로 보조 업무 객체의 특정 메소드와 주 업무 객체의 특정 메소드를 연결 -->
+				<!-- 주업무 후에 보조 업무 연결시킬것이므로 after 을 쓰는것이 맞음.  -->
+				<!-- m1(주업무)를 실행하고 난 뒤(<aop:after>)에 after(보조업무) 를 실행하겠습니다. -->
+				<!-- <aop:after method="after" pointcut-ref="m8"/> -->
+				<!-- 즉 노가다로 주업무에 하나하나씩 넣어야했던것이  위에코드 하나만으로 전체 메서드에 적용이된것 -->
+				
+				
+				<!--  Before 새로운 보조업무 매핑 -->
+				<!-- 메모를 수정할때만 ~ 실행시키고 싶을떄 -->		
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.edit(String))" id="m9"/>
+				
+				<!-- 엮어야 한다! -->
+				<!-- <aop:before method="before" pointcut-ref="m9"/> -->
+				<!-- <aop:before method="before" pointcut-ref="m2"/> -->
+				<!-- 이런식으로 위에서 지정해준 포인트 컷을 여기에서도 사용할 수 있다. -->
+				<!-- aop:기능 method 는 진짜 메서드 이름 진짜 beforer 이라는 메서드가 존재하므로!! -->
+				
+				
+		
+				<!--  Around 새로운 보조업무 매핑 -->
+				<!-- <aop:around method="around" pointcut-ref="m9"/> -->
+		
+				
+				<!-- After Throwing Advice 새로운 보조업무 매핑 -->
+				<aop:pointcut expression="execution(public void com.test.spring.aop.Memo.read(..))" id="m10"/>
+				
+				<!-- <aop:after-throwing method="afterthrowing" pointcut-ref="m10" throwing="e"/>-->
+				<!-- Exception e 에서 e 가 들어가면 된다. -->
+				
+				<!-- After Returning Advice 새로운 보조업무 매핑 -->
+				
+				<aop:pointcut expression="execution(public int com.test.spring.aop.Memo.search(..))" id="m11"/>
+				<aop:after-returning method="afterreturning" pointcut-ref="m11" returning="obj"/>
+				<!-- Object obj 에서 obj가 들어가면 된다. -->
+				
+				
+				
+				
+			</aop:aspect>
+		
+		</aop:config>
 		
 		
-	
- 
+		
 </beans>
