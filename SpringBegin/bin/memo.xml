@@ -11,6 +11,17 @@
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 		
 		<!-- 주 업무 객체 + 보조 업무 객체  -->
+		<!-- 
+			둘이 잇는 방법론
+			1. 주업무 객체, 보조 업무객체를 bean 객체로 생성한다.
+			2. <aop:config></aop:config> 를 생성하여 보조업무와 주업무 객체를 엮을 상자를 만들어준다.
+			3. 위의 상자 안에 <aop:aspect ref="보조업무객체명" id="해당객체아이디"></aop:aspect> 상자를 만든다.
+			4. <aop:pointcut expression="execution(public 반환값 경로.~~.메서드명(매개변수))" id="주 업무 객체 지정할 아이디"/> -> 주 업무 객체의 메서드를 선언한다. -> 메서드를 기준으로 보조업무객체가 실행될것이다.
+			5. <aop:(after/before/Around 등등 중 선택1) method="보조업무객체내의 사용할 메서드 이름" pointcut-ref="주업무객체의 id"/>
+		
+		 -->
+		
+		
 		
 		<!-- 주 업무 객체  -->
 		<bean id = "memo" class = "com.test.spring.aop.Memo"></bean>

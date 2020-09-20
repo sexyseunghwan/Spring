@@ -13,7 +13,7 @@ public class Ex02 {
 		
 		
 		//m2
-		Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);//의존주입을 위해 준비해놓는 셋팅
 		
 		
 		//1.생성자로 의존주입 하는경우

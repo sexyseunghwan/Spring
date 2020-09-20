@@ -22,7 +22,7 @@
 	<!-- 
 		스프링이 하는 행동 중 하나가  ***객체생성임*** 
 		
-		스프링이 객체의 생성부터 소멸까지 관리를 하게된다.
+		스프링이 객체의 생성부터 소멸까지 관리를 하게된다.***
 			
 	-->
 	
@@ -39,7 +39,7 @@
  	<property name="name" value = "하하하"></property>
  	<property name="age" value = "89"></property>
  	<!-- 
- 		property란  User class 의 setter 를 말하는 것이다.
+ 		property란  User class 의 "setter" 를 말하는 것이다.
  		
  		- name -> setName 을 뜻한다. name 을 하면 setName 찾아서 매개변수로 넣어주는 역할을 수행한다.
  		jstl getter 을 찾는방식과 비슷하다고 보면 된다.
@@ -56,7 +56,7 @@
  <bean id = "user3" class="com.test.spring.di.six.User">
  	<constructor-arg value = "호호호"></constructor-arg>
  	<constructor-arg value = "45"></constructor-arg>
- 	<!-- 순서를 따져서 생성자 매개변수로 들어가게 된다. -->
+ 	<!-- 순서를 자동으로 따져서(***) 생성자 매개변수로 들어가게 된다. -->
  </bean>
  
  
